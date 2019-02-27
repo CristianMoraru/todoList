@@ -1,0 +1,88 @@
+{
+  "name": "Todo",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "isComplete": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "usuario": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "Todold"
+    },
+    "owner": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "owner"
+    }
+  },
+  "acls": [],
+  "methods": {
+    "nuevoEvento": {
+      "accepts": [
+        {
+          "arg": "nombreEvento",
+          "type": "string",
+          "required": true,
+          "description": "nombre del evento",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "evento",
+          "type": "string",
+          "root": false,
+          "description": ""
+        }
+      ],
+      "description": "Crear nuevo metodo",
+      "http": [
+        {
+          "path": "/nuevoEvento",
+          "verb": "get"
+        }
+      ]
+    },
+    "prototype.eventosPendientes": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "eventosPendientes",
+          "type": "string",
+          "root": false,
+          "description": "Devuelve los eventos pendientes"
+        }
+      ],
+      "description": "Muestra los modelos pendientes",
+      "http": [
+        {
+          "path": "/eventosPendientes",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}
