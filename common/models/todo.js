@@ -8,10 +8,10 @@ module.exports = function(Todo) {
         next();
     });
     Todo.beforeRemote('create', function (context, Todo, next) {
-        if (context.req.date <= context.args.data.date) {
-        	console.log("No es posible generar un evento pasado");
-        }else{
+        if (Date.now() <= context.args.data.date) {
 	        next();
+        }else{
+            console.log("No es posible generar un evento pasado");
         }
     });
   
